@@ -1,22 +1,54 @@
 import React from "react";
-import { View, Button, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
+import { Button, Card } from "react-native-paper";
+
 export default function HomeScreen() {
   const router = useRouter();
+
   return (
-    <View style={styles.container}>
-      <Button title="Log in" onPress={() => router.push("/login")} />
-      <Button title="Create Account" onPress={() => router.push("/register")} />
+    <View style={styles.screen}>
+      <Card style={styles.container}>
+        <Card.Content>
+          <Button
+            mode="contained"
+            onPress={() => router.push("/login")}
+            style={styles.button}
+          >
+            Log in
+          </Button>
+          <Button
+            mode="outlined"
+            onPress={() => router.push("/register")}
+            style={styles.button}
+          >
+            Create Account
+          </Button>
+        </Card.Content>
+      </Card>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    gap: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#f5f5f5", // Fondo claro
+  },
+  container: {
+    width: "80%",
+    padding: 16,
+    backgroundColor: "#ffffff",
+    borderRadius: 8,
+    elevation: 4, // Sombra para Android
+    shadowColor: "#000", // Sombra para iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  button: {
+    marginVertical: 8,
   },
 });

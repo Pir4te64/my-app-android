@@ -8,6 +8,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { Provider as PaperProvider } from "react-native-paper";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -32,17 +33,39 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        {/* Pantalla principal sin tabs */}
-        <Stack.Screen
-          name="index"
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <PaperProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack>
+          {/* Pantalla principal sin tabs */}
+          <Stack.Screen
+            name="index"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="login"
+            options={{
+              title: "LogIn", // Personalizar título para /login
+              headerStyle: {
+                backgroundColor: "#6200EE", // Color de fondo del header
+              },
+              headerTintColor: "#fff", // Color del texto y los íconos
+            }}
+          />
+          <Stack.Screen
+            name="register"
+            options={{
+              title: "Register", // Personalizar título para /register
+              headerStyle: {
+                backgroundColor: "#6200EE",
+              },
+              headerTintColor: "#fff",
+            }}
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </PaperProvider>
   );
 }
